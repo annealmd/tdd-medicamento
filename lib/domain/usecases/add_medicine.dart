@@ -1,3 +1,4 @@
+import 'package:app_medicamento/domain/domain.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:app_medicamento/domain/repositories/medicine_repository.dart';
@@ -7,21 +8,12 @@ class AddMedicine {
 
   AddMedicine(this.repository);
 
-  void call(Params params) {
-    return repository.addMedicine(
-        id: params.id,
-        title: params.title,
-        quantity: params.quantity,
-        dose: params.dose,
-        frequency: params.frequency,
-        duration: params.duration,
-        start: params.start,
-        end: params.end,
-        isContinuous: params.isContinuous);
+  Future<MedicineEntity> call(AddParams params) async {
+    return await repository.addMedicine(params);
   }
 }
 
-class Params extends Equatable {
+class AddParams extends Equatable implements Params {
   final int id;
   final String title;
   final String quantity;
@@ -31,7 +23,7 @@ class Params extends Equatable {
   final DateTime start;
   final DateTime end;
   final bool isContinuous;
-  const Params({
+  const AddParams({
     required this.id,
     required this.title,
     required this.quantity,

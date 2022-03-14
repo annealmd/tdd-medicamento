@@ -8,16 +8,15 @@ class UpdateMedicine {
 
   UpdateMedicine(this.repository);
 
-  Future<void> call(Params params) async {
-    return await repository.updateMedicine(
-        id: params.id, newMedicine: params.newMedicine);
+  Future<void> call(UpdateParams params) async {
+    await repository.updateMedicine(params);
   }
 }
 
-class Params extends Equatable {
+class UpdateParams extends Equatable implements Params {
   final int id;
   final MedicineEntity newMedicine;
-  const Params({
+  const UpdateParams({
     required this.id,
     required this.newMedicine,
   });

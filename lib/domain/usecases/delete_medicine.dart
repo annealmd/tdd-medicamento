@@ -7,15 +7,15 @@ class DeleteMedicine {
 
   DeleteMedicine(this.repository);
 
-  Future<void> call(Params params) async {
-    return repository.deleteMedicine();
+  Future<void> call(DeleteParams params) async {
+    await repository.deleteMedicine(params);
   }
 }
 
-class Params extends Equatable {
+class DeleteParams extends Equatable implements Params {
   final int id;
   final int frequency;
-  const Params({
+  const DeleteParams({
     required this.id,
     required this.frequency,
   });

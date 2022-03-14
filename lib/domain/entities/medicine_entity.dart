@@ -1,39 +1,38 @@
 import 'package:equatable/equatable.dart';
 
-class Medicamento extends Equatable {
+class MedicineEntity extends Equatable {
   final int id;
   final String title;
-  final String quantidade;
+  final String quantity;
   final String dose;
-  final int frequencia;
-  final int? duracao;
-  final DateTime dataInicio;
-  final DateTime horaInicio;
-  final bool isContinuo;
+  final int frequency;
+  final int duration;
+  final DateTime start;
+  final DateTime end;
+  final bool isContinuous;
 
-  const Medicamento({
+  const MedicineEntity({
     required this.id,
     required this.title,
-    required this.quantidade,
+    required this.quantity,
     required this.dose,
-    required this.frequencia,
-    this.duracao,
-    required this.dataInicio,
-    required this.horaInicio,
-    required this.isContinuo,
+    required this.frequency,
+    this.duration = 800,
+    required this.start,
+    required this.end,
+    required this.isContinuous,
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         id,
         title,
-        quantidade,
+        quantity,
         dose,
-        frequencia,
-        duracao,
-        dataInicio,
-        horaInicio,
-        isContinuo
+        frequency,
+        duration,
+        start,
+        end,
+        isContinuous
       ];
 }
