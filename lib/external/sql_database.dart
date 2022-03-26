@@ -4,7 +4,7 @@ import 'package:path/path.dart' as path;
 
 import '../core/exceptions/database_exception.dart';
 
-class DatabaseIpml implements IDatabase {
+class SqlDatabase implements IDatabase {
   static const _databaseName = 'medicine_database';
   static const _tableName = 'medicine_table';
   static const _databaseVersion = 1;
@@ -17,11 +17,6 @@ class DatabaseIpml implements IDatabase {
   static const _columnDuration = 'duration';
   static const _columnStart = 'start';
   static const _columnIsContinuous = 'isContinuous';
-
-  // Future<TodoListEntity> allTodos() async {
-  //   final db = await database;
-  //   return db.query(_tableName);
-  // }
 
   Future<sql.Database> _initDatabase() async {
     final databasePath = await sql.getDatabasesPath();
@@ -50,18 +45,18 @@ class DatabaseIpml implements IDatabase {
   }
 
   @override
-  Future<void> insert(String table, Map<String, Object> data) async {
+  Future<void> insertItem(Map<String, Object> item) async {
     final db = _database ?? await _initDatabase();
 
     db.insert(
-      table,
-      data,
+      _tableName,
+      item,
       conflictAlgorithm: sql.ConflictAlgorithm.replace,
     );
   }
 
   @override
-  Future<void> count() async {
+  Future<void> countItens() async {
     //database connection
     final db = _database ?? await _initDatabase();
     var x = await db.rawQuery('SELECT COUNT (*) from user_medicamentos');
@@ -69,24 +64,25 @@ class DatabaseIpml implements IDatabase {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getData(String table) async {
+  Future<List<Map<String, dynamic>>> getItens() async {
     final db = _database ?? await _initDatabase();
-    return db.query(table, orderBy: "id ASC");
+    return db.query(_tableName, orderBy: "id ASC");
   }
 
   @override
-  Future<void> update(String table, Map<String, Object> data, int id) async {
+  Future<void> updateItem(
+      String table, Map<String, Object> item, int id) async {
     final db = _database ?? await _initDatabase();
-    await db.update(table, data, where: 'id = ?', whereArgs: [id]);
+    await db.update(table, item, where: 'id = ?', whereArgs: [id]);
   }
 
   @override
-  Future<void> delete(String table, int id) async {
+  Future<void> deleteItem(int id) async {
     // Get a reference to the database.
     final db = _database ?? await _initDatabase();
     // Remove the Medicamentofrom the Database.
     await db.delete(
-      table,
+      _tableName,
       // Use a `where` clause to delete a specific item.
       where: "id = ?",
       // Pass the item id as a whereArg to prevent SQL injection.

@@ -1,5 +1,5 @@
-import 'package:app_medicamento/core/Params/i_params.dart';
+import 'package:app_medicamento/core/Params/params.dart';
 
 abstract class ICreateMedicineRepository {
-  Future<void> createMedicine(IParams params);
+  Future<void> createMedicine(AddParams params);
 }

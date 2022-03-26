@@ -1,3 +1,4 @@
+import 'package:app_medicamento/core/Params/params.dart';
 import 'package:app_medicamento/features/medicine/domain/repositories/i_create_medicine_repository.dart';
 import 'package:app_medicamento/features/medicine/domain/usecases/add_medicine_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,19 +30,22 @@ void main() {
     registerFallbackValue(FakeParams());
   });
   // this is to check the comment above is right.
-  String toString(AddParams params) {
+  String checkParams(AddParams params) {
     return 'id: ${params.id} \ntext: ${params.title} \nstart: ${params.start}';
   }
 
-  test('check if sut is called with correct params', () async {
-    when(() => repository.createMedicine(any())).thenAnswer((_) async {});
-    await sut(params);
-    var captured = verify(() => sut(captureAny())).captured;
-    print(toString(captured.first));
-  });
   test('check if repository is called once', () async {
     when(() => repository.createMedicine(any())).thenAnswer((_) async {});
     await sut(params);
     verify(() => repository.createMedicine(params)).called(1);
+  });
+
+  test('check if repository is called with correct params', () async {
+    when(() => repository.createMedicine(any())).thenAnswer((_) async {});
+    await sut(params);
+    var captured =
+        verify(() => repository.createMedicine(captureAny())).captured;
+    expect(captured.first, isA<AddParams>());
+    print('Params: \n${checkParams(captured.first)}');
   });
 }

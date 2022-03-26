@@ -1,0 +1,1 @@
+// DatabaseException('Database failed to initialize $e')
