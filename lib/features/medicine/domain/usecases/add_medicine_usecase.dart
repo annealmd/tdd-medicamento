@@ -1,15 +1,21 @@
-import 'package:app_medicamento/features/medicine/domain/repositories/i_create_medicine_repository.dart';
+import 'package:dartz/dartz.dart';
 
-import '../../../../core/Params/params.dart';
+import '../../../../core/exceptions/add_medicine_exception.dart';
+import '../repositories/i_add_medicine_repository.dart';
+import 'params.dart';
 
-class AddMedicineUsecase {
-  final ICreateMedicineRepository repository;
+abstract class IAddMedicineUsecase {}
 
-  AddMedicineUsecase({required this.repository});
+class AddMedicineUsecase implements IAddMedicineUsecase {
+  final IAddMedicineRepository addRepository;
 
-  Future<void> call(AddParams params) async {
-    //TODO case durations is infinity
+  AddMedicineUsecase({required this.addRepository});
 
-    return await repository.createMedicine(params);
+  Future<Either<AddMedicineException, bool>> call(AddParams params) async {
+    if (params.title.isEmpty) {
+      return const Left(AddMedicineException('title não adicionado'));
+    }
+
+    return Right(await addRepository(params));
   }
 }

@@ -1,7 +1,6 @@
-class IParams {}
+abstract class IParams {}
 
 class AddParams extends IParams {
-  final int id;
   final String title;
   final String quantity;
   final String dose;
@@ -11,8 +10,7 @@ class AddParams extends IParams {
   final bool isContinuous;
 
   AddParams(
-      {required this.id,
-      required this.title,
+      {required this.title,
       required this.quantity,
       required this.dose,
       required this.frequency,
