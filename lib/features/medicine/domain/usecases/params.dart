@@ -5,7 +5,7 @@ class AddParams extends IParams {
   final String quantity;
   final String dose;
   final int frequency;
-  final int duration;
+  final int? duration;
   final DateTime start;
   final bool isContinuous;
 
@@ -14,7 +14,7 @@ class AddParams extends IParams {
       required this.quantity,
       required this.dose,
       required this.frequency,
-      required this.duration,
+      this.duration,
       required this.start,
       required this.isContinuous});
 }

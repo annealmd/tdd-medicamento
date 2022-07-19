@@ -1,5 +1,7 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../domain/usecases/delete_medicine_usecase.dart';
-import 'package:bloc/bloc.dart';
+
 import 'package:equatable/equatable.dart';
 
 part 'delete_medicine_event.dart';

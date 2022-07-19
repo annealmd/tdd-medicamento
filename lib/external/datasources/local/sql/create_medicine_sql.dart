@@ -19,7 +19,7 @@ class CreateMedicineSql extends SqlDatabase
         conflictAlgorithm: sql.ConflictAlgorithm.replace,
       );
       return true;
-    } on Exception catch (e) {
+    } catch (e) {
       throw DatabaseException('The insertion in the BD failed $e');
     }
   }

@@ -1,4 +1,3 @@
-import 'package:app_medicamento/core/exceptions/add_medicine_exception.dart';
 import 'package:app_medicamento/features/medicine/domain/repositories/i_add_medicine_repository.dart';
 import 'package:app_medicamento/features/medicine/domain/usecases/add_medicine_usecase.dart';
 import 'package:app_medicamento/features/medicine/domain/usecases/params.dart';
