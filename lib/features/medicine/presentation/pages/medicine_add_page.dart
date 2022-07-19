@@ -1,3 +1,4 @@
+import 'package:app_medicamento/features/medicine/presentation/widgets/form/checkbox_widget.dart';
 import 'package:app_medicamento/features/medicine/presentation/widgets/form/date_time_widget.dart';
 import 'package:app_medicamento/features/medicine/presentation/widgets/form/dose_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -177,33 +178,20 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                             ),
                             Expanded(
                               flex: 9,
-                              child: CheckboxListTile(
-                                  //autofocus: true,
-                                  focusNode: isContinuousFocusNode,
-                                  checkboxShape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(80)),
-                                  activeColor:
-                                      const Color.fromARGB(255, 37, 107, 39),
-                                  title: const Text(
-                                    '* Uso Contínuo.*',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(255, 145, 13, 4)),
-                                  ),
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  value: isContinuous,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isContinuous = !isContinuous;
-                                    });
-                                    isContinuous
-                                        ? FocusScope.of(context)
-                                            .requestFocus(startFocusNode)
-                                        : FocusScope.of(context)
-                                            .requestFocus(durationFocusNode);
-                                  }),
+                              child: CheckboxWidget(
+                                isContinuousFocusNode: isContinuousFocusNode,
+                                isContinuous: isContinuous,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isContinuous = !isContinuous;
+                                  });
+                                  isContinuous
+                                      ? FocusScope.of(context)
+                                          .requestFocus(startFocusNode)
+                                      : FocusScope.of(context)
+                                          .requestFocus(durationFocusNode);
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -255,45 +243,6 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                             setState(() => start = pickTime);
                           },
                         ),
-                        // Row(
-                        //   children: [
-                        //     Expanded(
-                        //       flex: 9,
-                        //       child: TextButton.icon(
-                        //         onPressed: () async {
-                        //           final pickDate =
-                        //               await DateTimePicker.selectDate(
-                        //                   context, start);
-                        //           if (pickDate == null) return;
-                        //           setState(() => start = pickDate);
-                        //         },
-                        //         icon: const Icon(Icons.calendar_month),
-                        //         label: Text(
-                        //             '${start.day}/ ${start.month}/${start.year}'),
-                        //         style: DateTimePicker.dateTimeStyle(context),
-                        //       ),
-                        //     ),
-                        //     const Expanded(
-                        //       flex: 1,
-                        //       child: SizedBox(),
-                        //     ),
-                        //     Expanded(
-                        //       flex: 9,
-                        //       child: TextButton.icon(
-                        //         onPressed: () async {
-                        //           final pickTime =
-                        //               await DateTimePicker.selectTime(
-                        //                   context, start);
-                        //           if (pickTime == null) return;
-                        //           setState(() => start = pickTime);
-                        //         },
-                        //         icon: const Icon(Icons.alarm),
-                        //         label: Text('${start.hour}: ${start.minute}'),
-                        //         style: DateTimePicker.dateTimeStyle(context),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
                         const Divider(),
                         const SizedBox(height: 20),
                         ElevatedButton.icon(
