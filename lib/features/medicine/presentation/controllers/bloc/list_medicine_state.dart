@@ -5,6 +5,8 @@ abstract class ListMedicineState extends Equatable {
   List<Object> get props => [];
 }
 
+class ListMedicineInitial extends ListMedicineState {}
+
 class ListMedicineLoading extends ListMedicineState {}
 
 class ListMedicineSuccess extends ListMedicineState {

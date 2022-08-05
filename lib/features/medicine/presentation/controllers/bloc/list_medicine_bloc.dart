@@ -10,12 +10,11 @@ part 'list_medicine_event.dart';
 part 'list_medicine_state.dart';
 
 class ListMedicineBloc extends Bloc<ListMedicineEvent, ListMedicineState> {
-  final ListMedicineUsecase listUsecase;
-  ListMedicineBloc({required this.listUsecase})
-      : super(ListMedicineSuccess(medicines: const <MedicineEntity>[])) {
+  final IListMedicineUsecase listUsecase;
+  ListMedicineBloc({required this.listUsecase}) : super(ListMedicineInitial()) {
     on<ListMedicineEvent>((event, emit) async {
       emit(ListMedicineLoading());
-      emit(ListMedicineSuccess(medicines: await listUsecase()));
+      emit(ListMedicineSuccess(medicines: await listUsecase.call()));
     });
   }
 }

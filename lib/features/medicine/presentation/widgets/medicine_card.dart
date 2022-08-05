@@ -1,15 +1,19 @@
+import 'package:app_medicamento/features/medicine/domain/entities/medicine_entity.dart';
+import 'package:app_medicamento/features/medicine/presentation/widgets/card_start_display.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+import '../../../../core/app_theme.dart';
 
 class MedicineCard extends StatelessWidget {
   const MedicineCard({
     Key? key,
-    required this.dateFormat,
     required this.index,
+    required this.medicineList,
   }) : super(key: key);
 
-  final DateFormat dateFormat;
+  //final DateFormat dateFormat;
   final int index;
+  final List<MedicineEntity> medicineList;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class MedicineCard extends StatelessWidget {
       elevation: 5,
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: avatarColor(index),
+          backgroundColor: AppTheme.avatarColor(index + 1),
           radius: 30,
           child: Padding(
             padding: const EdgeInsets.all(5),
@@ -26,45 +30,21 @@ class MedicineCard extends StatelessWidget {
                 '${index + 1}',
                 style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ),
-        title: const Text('Medicamento Nome'),
-        subtitle: Text(
-          dateFormat.format(DateTime.now()),
+        title: Text(
+          medicineList[index].title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        trailing: const Icon(Icons.all_inclusive),
+        subtitle: CardStartDisplay(start: medicineList[index].start),
+        trailing: medicineList[index].isContinuous
+            ? const Icon(Icons.all_inclusive)
+            : null,
       ),
     );
-  }
-}
-
-Color avatarColor(int index) {
-  switch (index) {
-    case 1:
-      return Colors.blue.shade700;
-    case 2:
-      return Colors.pink.shade700;
-    case 3:
-      return Colors.green.shade700;
-    case 4:
-      return Colors.yellow.shade700;
-    case 5:
-      return Colors.red.shade700;
-    case 6:
-      return Colors.teal.shade700;
-    case 7:
-      return Colors.purple.shade600;
-    case 8:
-      return Colors.indigo.shade700;
-    case 9:
-      return Colors.orange.shade700;
-    case 10:
-      return Colors.cyan.shade700;
-    default:
-      return Colors.blueGrey.shade700;
   }
 }

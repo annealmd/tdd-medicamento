@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CheckboxWidget extends StatelessWidget {
   const CheckboxWidget({
@@ -19,9 +17,10 @@ class CheckboxWidget extends StatelessWidget {
     return CheckboxListTile(
       //autofocus: true,
       focusNode: isContinuousFocusNode,
-      checkboxShape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
-      activeColor: const Color.fromARGB(255, 37, 107, 39),
+      // checkboxShape:
+      //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+      //
+      // activeColor: const Color.fromARGB(255, 37, 107, 39),
       title: const Text(
         '* Uso Contínuo.*',
         style: TextStyle(

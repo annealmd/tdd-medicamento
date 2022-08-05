@@ -13,6 +13,7 @@ class CustomFormField extends StatelessWidget {
     this.validator,
     this.onSaved,
     required this.keyboard,
+    this.onTap,
   }) : super(key: key);
   final FocusNode autoFocus;
   final FocusNode focus;
@@ -21,6 +22,7 @@ class CustomFormField extends StatelessWidget {
   final IconData? icon;
   final String? Function(String? value)? validator;
   final void Function(String? value)? onSaved;
+  final void Function()? onTap;
   final TextInputType keyboard;
   late String fieldValue;
 

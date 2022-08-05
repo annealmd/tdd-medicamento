@@ -13,7 +13,6 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
 
   AddMedicineBloc({required this.addUsecase}) : super(AddMedicineInitial()) {
     on<AddMedicine>((event, emit) async {
-      emit(AddMedicineLoading());
       params = AddParams(
           title: event.title,
           quantity: event.quantity,
@@ -23,9 +22,7 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
           start: event.start,
           isContinuous: event.isContinuous);
       var result = await addUsecase(params);
-      if (result.isRight()) {
-        emit(AddMedicineSuccess(message: '${event.title} foi adicionado'));
-      } else {
+      if (result.isLeft()) {
         emit(const AddMedicineError(
             message: 'Erro, medicamento não adicionado'));
       }

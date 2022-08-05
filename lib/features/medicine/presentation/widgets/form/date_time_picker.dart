@@ -8,7 +8,7 @@ class DateTimePicker {
       helpText: 'Entre o dia de início do tratamento',
       locale: const Locale("pt", "BR"),
       initialDate: start,
-      firstDate: DateTime(2022),
+      firstDate: DateTime(DateTime.now().year),
       lastDate: DateTime(2100),
     );
     return DateTime(

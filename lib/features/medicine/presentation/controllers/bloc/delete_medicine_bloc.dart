@@ -9,7 +9,7 @@ part 'delete_medicine_state.dart';
 
 class DeleteMedicineBloc
     extends Bloc<DeleteMedicineEvent, DeleteMedicineState> {
-  final DeleteMedicineUsecase deleteUsecase;
+  final IDeleteMedicineUsecase deleteUsecase;
   DeleteMedicineBloc({required this.deleteUsecase})
       : super(DeleteMedicineInitial()) {
     on<DeleteMedicine>((event, emit) async {

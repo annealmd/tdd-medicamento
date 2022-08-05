@@ -1,6 +1,3 @@
-import 'package:app_medicamento/features/medicine/presentation/widgets/form/checkbox_widget.dart';
-import 'package:app_medicamento/features/medicine/presentation/widgets/form/date_time_widget.dart';
-import 'package:app_medicamento/features/medicine/presentation/widgets/form/dose_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,11 +5,11 @@ import 'package:get_it/get_it.dart';
 
 import '../../../../core/internationalization.dart';
 import '../controllers/bloc/add_medicine_bloc.dart';
-import '../widgets/form/custom_form_field.dart';
-import '../widgets/form/date_time_picker.dart';
+import '../widgets/form/form.dart';
 
 class MedicineAddPage extends StatefulWidget {
   const MedicineAddPage({Key? key}) : super(key: key);
+  static const routeName = '/addMedicine';
 
   @override
   State<MedicineAddPage> createState() => _MedicineAddPageState();
@@ -27,7 +24,8 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
   late String dose = 'ml';
   late int frequency;
   int duration = 2000;
-  DateTime start = DateTime(2022, 9, 10, 22, 30);
+  DateTime start =
+      DateTime(DateTime.now().year, DateTime.now().month, 10, 22, 30);
   var isContinuous = false;
 
   final titleFocusNode = FocusNode();
@@ -35,7 +33,8 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
   final doseFocusNode = FocusNode();
   final frequencyFocusNode = FocusNode();
   final durationFocusNode = FocusNode();
-  final startFocusNode = FocusNode();
+  final dateFocusNode = FocusNode();
+  final hourFocusNode = FocusNode();
   final isContinuousFocusNode = FocusNode();
   final saveFocusNode = FocusNode();
 
@@ -46,7 +45,8 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
     doseFocusNode.dispose();
     frequencyFocusNode.dispose();
     durationFocusNode.dispose();
-    startFocusNode.dispose();
+    dateFocusNode.dispose();
+    hourFocusNode.dispose();
     isContinuousFocusNode.dispose();
     saveFocusNode.dispose();
     super.dispose();
@@ -55,7 +55,17 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          tooltip: 'Retorna',
+          padding: const EdgeInsets.all(5),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.popAndPushNamed(context, '/'),
+        ),
+        toolbarHeight: 30,
+      ),
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
@@ -71,13 +81,11 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
         ),
         child: Padding(
           padding:
-              const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 10),
+              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
           child: BlocBuilder<AddMedicineBloc, AddMedicineState>(
             bloc: addBloc,
             builder: (context, state) {
-              if (state is AddMedicineLoading) {
-                return const CircularProgressIndicator();
-              } else if (state is AddMedicineError) {
+              if (state is AddMedicineError) {
                 return Center(
                   child: Text(
                     state.message,
@@ -162,7 +170,7 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                               child: CustomFormField(
                                 keyboard: TextInputType.number,
                                 autoFocus: frequencyFocusNode,
-                                focus: isContinuousFocusNode,
+                                focus: durationFocusNode,
                                 label: 'Frequência',
                                 hint: '3 (vezes ao dia)',
                                 validator: (value) =>
@@ -185,11 +193,6 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                                   setState(() {
                                     isContinuous = !isContinuous;
                                   });
-                                  isContinuous
-                                      ? FocusScope.of(context)
-                                          .requestFocus(startFocusNode)
-                                      : FocusScope.of(context)
-                                          .requestFocus(durationFocusNode);
                                 },
                               ),
                             ),
@@ -208,7 +211,7 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                             : CustomFormField(
                                 keyboard: TextInputType.number,
                                 autoFocus: durationFocusNode,
-                                focus: startFocusNode,
+                                focus: dateFocusNode,
                                 label: 'Duração do tratamento',
                                 hint: '10 (dias)',
                                 validator: (value) =>
@@ -242,6 +245,8 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                             if (pickTime == null) return;
                             setState(() => start = pickTime);
                           },
+                          dateFocusNode: dateFocusNode,
+                          hourFocusNode: hourFocusNode,
                         ),
                         const Divider(),
                         const SizedBox(height: 20),
@@ -270,6 +275,7 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                                   isContinuous: isContinuous,
                                 ),
                               );
+                              Navigator.popAndPushNamed(context, '/');
                             }
                           },
                         ),

@@ -1,31 +1,10 @@
-import '../external/datasources/local/sql/read_medicine_sql.dart';
-import '../external/datasources/local/sql/update_medicine_sql.dart';
-import '../features/medicine/data/datasources/i_count_medicine_data_source.dart';
-import '../features/medicine/data/datasources/i_create_medicine_data_source.dart';
-import '../features/medicine/data/datasources/i_read_medicine_datasource.dart';
-import '../features/medicine/data/datasources/i_update_medicine_data_source.dart';
-import '../features/medicine/data/repositories/add_medicine_repository_ipml.dart';
-import '../features/medicine/domain/repositories/i_add_medicine_repository.dart';
-import '../features/medicine/domain/usecases/add_medicine_usecase.dart';
-import '../features/medicine/presentation/controllers/bloc/add_medicine_bloc.dart';
 import 'package:get_it/get_it.dart';
-
-import '../external/datasources/local/sql/count_medicine_sql.dart';
-import '../external/datasources/local/sql/create_medicine_sql.dart';
-import '../external/datasources/local/sql/delete_medicine_sql.dart';
-import '../features/medicine/data/datasources/i_delete_medicine_data_source.dart';
-import '../features/medicine/data/repositories/delete_medicine_repository_ipml.dart';
-import '../features/medicine/data/repositories/edit_medicine_repository_ipml.dart';
-import '../features/medicine/data/repositories/list_medicine_repository_ipml.dart';
-import '../features/medicine/domain/repositories/i_delete_medicine_repository.dart';
-import '../features/medicine/domain/repositories/i_edit_medicine_repository.dart';
-import '../features/medicine/domain/repositories/i_list_medicine_repository.dart';
-import '../features/medicine/domain/usecases/delete_medicine_usecase.dart';
-import '../features/medicine/domain/usecases/edit_medicine_usecase.dart';
-import '../features/medicine/domain/usecases/list_medicine_usecase.dart';
-import '../features/medicine/presentation/controllers/bloc/delete_medicine_bloc.dart';
-import '../features/medicine/presentation/controllers/bloc/edit_medicine_bloc.dart';
-import '../features/medicine/presentation/controllers/bloc/list_medicine_bloc.dart';
+import '../external/datasources/local/sql/sql.dart';
+import '../features/medicine/data/datasources/i_data_sources.dart';
+import '../features/medicine/data/repositories/repositories.dart';
+import '../features/medicine/domain/repositories/i_repositories.dart';
+import '../features/medicine/domain/usecases/usecases.dart';
+import '../features/medicine/presentation/controllers/bloc/bloc.dart';
 
 class Inject {
   static void init() {

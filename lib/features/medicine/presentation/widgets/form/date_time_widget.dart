@@ -6,11 +6,15 @@ class DateTimeWidget extends StatelessWidget {
       this.onPressedDate,
       this.onPressedTime,
       required this.start,
-      required this.dateTimeStyle})
+      required this.dateTimeStyle,
+      this.dateFocusNode,
+      this.hourFocusNode})
       : super(key: key);
   final void Function()? onPressedDate;
   final void Function()? onPressedTime;
   final DateTime start;
+  final FocusNode? dateFocusNode;
+  final FocusNode? hourFocusNode;
   final ButtonStyle dateTimeStyle;
 
   @override
@@ -20,12 +24,8 @@ class DateTimeWidget extends StatelessWidget {
         Expanded(
           flex: 9,
           child: TextButton.icon(
+            focusNode: dateFocusNode,
             onPressed: onPressedDate,
-            // () async {
-            //   final pickDate = await DateTimePicker.selectDate(context, start);
-            //   if (pickDate == null) return;
-            //   setState(() => start = pickDate);
-            // },
             icon: const Icon(Icons.calendar_month),
             label: Text('${start.day}/ ${start.month}/${start.year}'),
             style: dateTimeStyle,
@@ -38,12 +38,8 @@ class DateTimeWidget extends StatelessWidget {
         Expanded(
           flex: 9,
           child: TextButton.icon(
+            focusNode: hourFocusNode,
             onPressed: onPressedTime,
-            // () async {
-            //   final pickTime = await DateTimePicker.selectTime(context, start);
-            //   if (pickTime == null) return;
-            //   setState(() => start = pickTime);
-            // },
             icon: const Icon(Icons.alarm),
             label: Text('${start.hour}: ${start.minute}'),
             style: dateTimeStyle,

@@ -8,6 +8,7 @@ abstract class EditMedicineEvent extends Equatable {
 }
 
 class EditMedicine extends EditMedicineEvent {
+  final int id;
   final String title;
   final String quantity;
   final String dose;
@@ -17,7 +18,8 @@ class EditMedicine extends EditMedicineEvent {
   final bool isContinuous;
 
   const EditMedicine(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.quantity,
       required this.dose,
       required this.frequency,

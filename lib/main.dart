@@ -1,9 +1,10 @@
+import 'package:app_medicamento/core/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:app_medicamento/core/internationalization.dart';
 
 import 'package:app_medicamento/core/inject.dart';
-import 'features/medicine/presentation/pages/medicine_add_page.dart';
-import 'features/medicine/presentation/pages/medicine_list_page.dart';
+
+import 'core/app_theme.dart';
 
 void main() {
   Inject.init();
@@ -18,16 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      darkTheme: ThemeData(
-        colorSchemeSeed: Colors.cyan,
-        brightness: Brightness.dark,
-      ),
-      theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 1, 114, 82),
-        brightness: Brightness.light,
-        //primarySwatch: Colors.green,
-      ),
-      home: const MedicineAddPage(),
+      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
+      onGenerateRoute: AppRouter.onGenerateRoute,
       localizationsDelegates: Internationalization.localizationsDelegates,
       supportedLocales: Internationalization.supportedLocales,
     );
