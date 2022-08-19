@@ -20,6 +20,7 @@ class MedicineMapper {
 
   static Map<String, dynamic> toJson(AddParams params) {
     var json = {
+      'id': params.id,
       'title': params.title,
       'quantity': params.quantity,
       'dose': params.dose,

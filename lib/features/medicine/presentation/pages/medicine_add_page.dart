@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../core/app_theme.dart';
 import '../../../../core/internationalization.dart';
 import '../controllers/bloc/add_medicine_bloc.dart';
 import '../widgets/form/form.dart';
@@ -231,8 +232,9 @@ class _MedicineAddPageState extends State<MedicineAddPage> {
                           height: 15,
                         ),
                         DateTimeWidget(
+                          dateAndtime: true,
                           start: start,
-                          dateTimeStyle: DateTimePicker.dateTimeStyle(context),
+                          dateTimeStyle: AppTheme.dateTimeStyle(context),
                           onPressedDate: () async {
                             final pickDate =
                                 await DateTimePicker.selectDate(context, start);

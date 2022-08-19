@@ -48,4 +48,23 @@ class AppTheme {
         return Colors.blueGrey.shade700;
     }
   }
+
+  static ButtonStyle dateTimeStyle(BuildContext context) {
+    return ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(Colors.white70),
+      foregroundColor: MaterialStateProperty.all(Colors.black87),
+      fixedSize: MaterialStateProperty.all(
+          Size.fromWidth(MediaQuery.of(context).size.width * 0.1)),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+      side: MaterialStateProperty.all(
+          const BorderSide(width: 1.5, color: Color.fromARGB(255, 56, 55, 55))),
+      padding:
+          MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 20)),
+      textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 16)),
+    );
+  }
 }

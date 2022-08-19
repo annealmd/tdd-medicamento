@@ -40,7 +40,17 @@ class MedicineCard extends StatelessWidget {
           medicineList[index].title,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: CardStartDisplay(start: medicineList[index].start),
+        isThreeLine: true,
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${medicineList[index].quantity} ${medicineList[index].dose}',
+              textAlign: TextAlign.start,
+            ),
+            CardStartDisplay(start: medicineList[index].start),
+          ],
+        ),
         trailing: medicineList[index].isContinuous
             ? const Icon(Icons.all_inclusive)
             : null,

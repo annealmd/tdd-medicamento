@@ -13,11 +13,10 @@ import '../widgets/form/date_time_picker.dart';
 import '../widgets/form/date_time_widget.dart';
 
 class MedicineEditPage extends StatefulWidget {
-  const MedicineEditPage(
-      {Key? key, required this.medicine, required this.index})
+  MedicineEditPage({Key? key, required this.medicine, required this.index})
       : super(key: key);
   static const routeName = '/editMedicine';
-  final MedicineEntity medicine;
+  MedicineEntity medicine;
   final int index;
 
   @override
@@ -114,12 +113,12 @@ class _MedicineEditPageState extends State<MedicineEditPage> {
                           focus: frequencyFocusNode,
                           label: 'Quantidade de ${widget.medicine.dose} :',
                           hint: widget.medicine.quantity,
-                          //icon: Icons.medication,
                           // validator: (value) =>
-                          //     value!.isEmpty ? 'Nome Obrigatório' : null,
+                          //     value!.isEmpty ? 'Campo Obrigatório' : null,
                           onSaved: (value) {
-                            value ?? widget.medicine.quantity;
-                            quantity = value as String;
+                            if (value != null) {
+                              quantity = value;
+                            }
                           },
                         ),
                         const Divider(),
@@ -128,10 +127,13 @@ class _MedicineEditPageState extends State<MedicineEditPage> {
                           autoFocus: frequencyFocusNode,
                           focus: durationFocusNode,
                           label: 'Frequência ao dia',
-                          hint: '${widget.medicine.frequency} vezes',
+                          hint: '${widget.medicine.frequency}',
+                          // validator: (value) =>
+                          //     value!.isEmpty ? 'Campo Obrigatório' : null,
                           onSaved: (value) {
-                            value ?? widget.medicine.quantity;
-                            frequency = value as int;
+                            if (value != null) {
+                              frequency = int.parse(value);
+                            }
                           },
                         ),
                         const Divider(),
@@ -145,28 +147,26 @@ class _MedicineEditPageState extends State<MedicineEditPage> {
                                 autoFocus: durationFocusNode,
                                 focus: hourFocusNode,
                                 label: 'Duração',
-                                hint: '${widget.medicine.duration} dias',
+                                hint: '${widget.medicine.duration}',
+                                // validator: (value) =>
+                                //     value!.isEmpty ? 'Campo Obrigatório' : null,
                                 onSaved: (value) {
-                                  value ?? widget.medicine.duration;
-                                  duration = int.parse(value!);
-                                },
-                              ),
+                                  if (value != null) {
+                                    duration = int.parse(value);
+                                  }
+                                }),
                         const Divider(),
                         DateTimeWidget(
+                          dateAndtime: false,
                           start: start,
-                          dateTimeStyle: DateTimePicker.dateTimeStyle(context),
-                          onPressedDate: () async {
-                            final pickDate =
-                                await DateTimePicker.selectDate(context, start);
-                            if (pickDate == null) return;
-                            setState(() => start = pickDate);
-                          },
+                          dateTimeStyle: AppTheme.dateTimeStyle(context),
                           onPressedTime: () async {
                             final pickTime =
                                 await DateTimePicker.selectTime(context, start);
                             if (pickTime == null) return;
                             setState(() => start = pickTime);
                           },
+                          hourFocusNode: hourFocusNode,
                         ),
                         const Divider(),
                         const SizedBox(height: 10),
