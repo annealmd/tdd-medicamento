@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 # app_medicamento
 
+=======
+>>>>>>> 5098e5f41173d7f043135c2c079bc4abd2a9f185
 <h1> tdd-medicamento </h1>
 <h3>this is a change in the arch of the project <br>
 https://github.com/annealmd/app_medicamento</h3>
 check the repo above for images of the app
+<<<<<<< HEAD
 
 ## Getting Started
 
@@ -17,3 +21,5 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+>>>>>>> 5098e5f41173d7f043135c2c079bc4abd2a9f185
